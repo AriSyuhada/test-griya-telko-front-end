@@ -18,6 +18,7 @@ export default function ModalAccount({ setIsModalShow, setNewAccount, setListSal
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
+    console.log('submitting');
 
     const formData = new FormData();
 

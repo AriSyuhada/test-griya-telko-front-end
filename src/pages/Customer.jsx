@@ -87,7 +87,7 @@ export default function Customer() {
   };
 
   const handleDeleteCustomer = async (id) => {
-    let res = await fetch(`http://127.0.0.1:8000/api/customers/${id}`, {
+    await fetch(`http://127.0.0.1:8000/api/customers/${id}`, {
       method: 'DELETE',
       headers: {
         'Authorization': `${user.type} ${user.token}`,
@@ -142,7 +142,7 @@ export default function Customer() {
                     <th scope="row" className="px-6 py-4 font-medium text-slate-800 whitespace-nowrap">{customer.name}</th>
                     <td className="px-6 py-4">{customer.phone_number}</td>
                     <td className="px-6 py-4">{customer.address}</td>
-                    <td className="px-6 py-4">{customer.verified ? 'verified' : 'unverified'}</td>
+                    <td className={`px-6 py-4 font-bold ${customer.verified ? 'text-green-400' : 'text-red-400'}`}>{customer.verified ? 'verified' : 'unverified'}</td>
                     {
                       user.role === 'sales' &&
                         <td className="px-6 py-4 text-right flex flex-row gap-4 justify-end">
@@ -161,7 +161,10 @@ export default function Customer() {
               :
                 [...Array(4)].map((_, i) => (
                   <tr key={`user-sales-skeleton-${i}`} className="bg-slate-50 border-b animate-pulse">
-                    <td scope="col"className="px-6 py-4"><span className="invisible">Data</span></td>
+                    <td className="px-6 py-4"><span className="invisible">Data</span></td>
+                    <td className="px-6 py-4"><span className="invisible">Data</span></td>
+                    <td className="px-6 py-4"><span className="invisible">Data</span></td>
+                    <td className="px-6 py-4"><span className="invisible">Data</span></td>
                     <td className="px-6 py-4"><span className="invisible">Data</span></td>
                     <td className="px-6 py-4"><span className="invisible">Data</span></td>
                     <td className="px-6 py-4"><span className="invisible">Data</span></td>

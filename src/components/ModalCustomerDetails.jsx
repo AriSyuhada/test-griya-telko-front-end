@@ -5,6 +5,16 @@ export default function ModalCustomerDetails({ setIsModalShow, setCustomerData, 
   const { user } = useAuth();
 
   const handleModalClose = () => {
+    setCustomerData({
+      id: '', 
+      package_id: '', 
+      name: '', 
+      phone_number: '', 
+      address: '', 
+      verified: 0,
+      id_card_pict: null, 
+      house_pict: null
+    });
     setIsModalShow(false);
   };
 

@@ -8,18 +8,28 @@ export default function ModalCustomer({ setIsModalShow, setCustomerData, setList
 
   const mapOptions = () => {
     const element = [];
-    const currentSelected = customerData.package_id === '';
-    console.log(currentSelected)
-    element.push(<option key={`options-package-default`} value='' disabled hidden selected={currentSelected} >Choose Package</option>)
+    const defaultSelected = customerData.package_id === '';
+    element.push(<option key={`options-package-default`} value='' disabled hidden selected={defaultSelected} >Choose Package</option>)
     for (let key in listPackages) {
       if (key === 'complete') continue;
-      element.push(<option key={`options-package-${key}`} value={key} { ...key === customerData.id ? 'selected' : '' }>{listPackages[key].name}</option>)
+      const currentSelected = key === String(customerData.package_id);
+      element.push(<option key={`options-package-${key}`} value={key} selected={currentSelected}>{listPackages[key].name}</option>)
     }
 
     setOptions(element);
   }
 
   const handleModalClose = () => {
+    setCustomerData({
+      id: '', 
+      package_id: '', 
+      name: '', 
+      phone_number: '', 
+      address: '', 
+      verified: 0,
+      id_card_pict: null, 
+      house_pict: null
+    });
     setIsModalShow(false);
   };
 
@@ -37,7 +47,7 @@ export default function ModalCustomer({ setIsModalShow, setCustomerData, setList
     const formData = new FormData();
 
     for (const key in customerData) {
-      if (key === 'id' && customerData[key] == '') continue;
+      if (key === 'id' && customerData[key] === '') continue;
       formData.append(key, customerData[key]);
     }
 
@@ -103,15 +113,15 @@ export default function ModalCustomer({ setIsModalShow, setCustomerData, setList
           </div>
           <div className="flex flex-col items-start gap-2">
             <label htmlFor="name" className="self-start text-sm font-medium text-slate-800">Name</label>
-            <input type="text" name="name" value={customerData.name} onChange={handleOnChangeInput} className="bg-slate-50 border border-slate-500 text-slate-800 text-sm rounded-lg focus:ring-slate-600 focus:border-slate-600 block w-full p-2.5" />
+            <input type="text" name="name" placeholder="Name" value={customerData.name} onChange={handleOnChangeInput} className="bg-slate-50 border border-slate-500 text-slate-800 text-sm rounded-lg focus:ring-slate-600 focus:border-slate-600 block w-full p-2.5" />
           </div>
           <div className="flex flex-col items-start gap-2">
             <label htmlFor="phone_number" className="self-start text-sm font-medium text-slate-800">Phone Number</label>
-            <input type="text" name="phone_number" value={customerData.phone_number} onChange={handleOnChangeInput} className="bg-slate-50 border border-slate-500 text-slate-800 text-sm rounded-lg focus:ring-slate-600 focus:border-slate-600 block w-full p-2.5" />
+            <input type="text" name="phone_number" placeholder="Phone Number" value={customerData.phone_number} onChange={handleOnChangeInput} className="bg-slate-50 border border-slate-500 text-slate-800 text-sm rounded-lg focus:ring-slate-600 focus:border-slate-600 block w-full p-2.5" />
           </div>
           <div className="flex flex-col items-start gap-2">
             <label htmlFor="address" className="self-start text-sm font-medium text-slate-800">Adress</label>
-            <input type="text" name="address" value={customerData.address} onChange={handleOnChangeInput} className="bg-slate-50 border border-slate-500 text-slate-800 text-sm rounded-lg focus:ring-slate-600 focus:border-slate-600 block w-full p-2.5" />
+            <input type="text" name="address" placeholder="Address" value={customerData.address} onChange={handleOnChangeInput} className="bg-slate-50 border border-slate-500 text-slate-800 text-sm rounded-lg focus:ring-slate-600 focus:border-slate-600 block w-full p-2.5" />
           </div>
           <div className="flex flex-col items-start gap-2">
             <label htmlFor="id_card_pict" className="self-start text-sm font-medium text-slate-800">ID Card Picture</label>

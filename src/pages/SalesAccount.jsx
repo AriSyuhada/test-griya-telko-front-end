@@ -25,7 +25,8 @@ export default function SalesAccount() {
   };
 
   const handleDeleteAccount = async (id) => {
-    let res = await fetch(`http://127.0.0.1:8000:/api/users/${id}`, {
+    console.log(id);
+    await fetch(`http://127.0.0.1:8000/api/users/${id}`, {
       method: 'DELETE',
       headers: {
         'Authorization': `${user.type} ${user.token}`,
@@ -76,7 +77,7 @@ export default function SalesAccount() {
               :
                 [...Array(4)].map((_, i) => (
                   <tr key={`user-sales-skeleton-${i}`} className="bg-slate-50 border-b animate-pulse">
-                    <td scope="col"className="px-6 py-4"><span className="invisible">Data</span></td>
+                    <td className="px-6 py-4"><span className="invisible">Data</span></td>
                     <td className="px-6 py-4"><span className="invisible">Data</span></td>
                     <td className="px-6 py-4"><span className="invisible">Data</span></td>
                     <td className="px-6 py-4"><span className="invisible">Data</span></td>
